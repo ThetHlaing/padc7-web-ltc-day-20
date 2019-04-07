@@ -1,5 +1,6 @@
 import {retrieveData,storeData} from "../utilies/localStorage";
 import firestore from '../utilies/firebase';
+import { join } from "path";
 
 export const fetchArticles = () => dispatch => {  
   //const articles = retrieveData('articles');
@@ -20,12 +21,38 @@ export const fetchArticles = () => dispatch => {
   
 };
 
-export const insertArticle = (article) => dispatch => {  
-  // article.id = 12;
+export const insertArticle = (article,cb) => dispatch => {  
+
+  //article.user = firestore.doc('users/'+article.author.id);
+  article.user = firestore.collection('users').doc(article.author.id);
   firestore.collection('articles').add(article).then( (data) => {
     article.id = data.id;
+    
     dispatch({
       type: 'ADD_NEW_ARTICLE',
+      article : article
+    });
+    cb();
+  });
+  
+  
+};
+
+
+export const insertComment = (comment,article) => dispatch => {  
+  if( article.comments == undefined){
+    article.comments = [comment];
+  }
+  else{
+    article.comments.push(comment);
+  }
+  
+  //article.user = firestore.doc('users/'+article.author.id);
+  firestore.collection('articles').doc(article.id).update({
+    comments : article.comments
+  }).then( () =>  {       
+    dispatch({
+      type: 'UPDATE_ARTICLE',
       article : article
     });
   });
@@ -40,7 +67,7 @@ export const deleteArticle = (id,cb) => dispatch => {
       type : 'DELETE_ARTICLE',
       id : id
     });
-    cb();
+    //cb();
   });
   
 

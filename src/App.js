@@ -7,13 +7,13 @@ import {
   Link
 } from "react-router-dom";
 
-import LoginForm from "./components/LoginForm";
-import RegisterForm from "./components/RegisterForm";
+import LoginForm from "./components/auth/LoginForm";
+import RegisterForm from "./components/auth/RegisterForm";
 
-import NewArticleForm from "./components/NewArticleForm";
-import ArticleList from "./components/ArticleList";
-import ArticleDetail from "./components/ArticleDetail";
-import DeleteArticle from "./components/DeleteArticle";
+import NewArticleForm from "./components/container/NewArticleForm";
+import ArticleList from "./components/container/ArticleList";
+import ArticleDetail from "./components/container/ArticleDetail";
+import DeleteArticle from "./components/container/DeleteArticle";
 import { connect } from 'react-redux';
 
 

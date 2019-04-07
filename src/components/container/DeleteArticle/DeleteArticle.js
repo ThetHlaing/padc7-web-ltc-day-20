@@ -6,7 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import { connect } from 'react-redux';
-import { deleteArticle, fetchArticles } from '../../actions/articleActions';
+import { deleteArticle, fetchArticles } from '../../../actions/articleActions';
 
 class DeleteArticle extends React.Component {
   constructor(props){

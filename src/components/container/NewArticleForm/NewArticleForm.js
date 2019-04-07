@@ -6,7 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import { connect } from "react-redux";
-import { insertArticle } from '../../actions/articleActions';
+import { insertArticle } from '../../../actions/articleActions';
 
 class NewArticleForm extends React.Component {
   constructor(props) {
@@ -23,13 +23,16 @@ class NewArticleForm extends React.Component {
     const newArticle = {
       title: this.title.current.value,
       content: this.content.current.value,
-      created_by : this.props.currentUser.id
+      created_by : this.props.currentUser.id,
+      author : this.props.currentUser
     };
     console.log(newArticle);
-    this.props.insertArticle(newArticle);
-    this.setState({
-      completeArticle: true
+    this.props.insertArticle(newArticle, () => {
+      this.setState({
+        completeArticle: true
+      });
     });
+    
   };
 
   render() {

@@ -3,17 +3,17 @@ const articles = (state = [], action) => {
       case 'ADD_NEW_ARTICLE':
         return [
           ...state,
-          {
-            id: action.article.id,
-            title: action.article.title,
-            content : action.article.content,
-            created_by : action.article.created_by
-          }
+          action.article          
         ];
       case 'FETCH_ARTICLES':
         return [...action.data]
       case 'DELETE_ARTICLE':
         return state.filter(item => item.id !== action.id)
+      case 'UPDATE_ARTICLE' :
+        return [
+          ...state.filter(item => item.id !== action.article.id),
+          action.article
+        ]
       default:
         return state
     }

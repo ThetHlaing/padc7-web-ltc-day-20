@@ -6,7 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import { connect } from "react-redux";
-import { insertUser } from "../../actions/userActions"
+import { insertUser } from "../../../actions/userActions"
 
 class RegisterForm extends React.Component {
   constructor(props) {

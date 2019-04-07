@@ -6,8 +6,9 @@ import {
   Link
 } from "react-router-dom";
 import { connect } from 'react-redux';
-import { fetchArticles } from '../../actions/articleActions'
-import { fetchUsers } from '../../actions/userActions'
+import { fetchArticles } from '../../../actions/articleActions'
+import { fetchUsers } from '../../../actions/userActions'
+import CommentForm from '../CommentForm'
 
 class ArticleDetail extends React.Component{
 
@@ -23,13 +24,13 @@ class ArticleDetail extends React.Component{
         const users = this.props.users;
         const currentUser = this.props.currentUser;
         const currentArticle =  articles.find( item => item.id == id);
+      
         if(currentArticle === undefined) return <div>404 - Content not found</div>
         
-        console.log(currentArticle);
-        const author = users.find(obj => obj.id === currentArticle.created_by);
+        // const author = users.find(obj => obj.id === currentArticle.created_by);
         let allowToDelete = false;
         if(currentUser){
-          if(currentUser.id === author.id){
+          if(currentUser.id === currentArticle.author.id){
             allowToDelete = true;
           }
         }
@@ -37,7 +38,7 @@ class ArticleDetail extends React.Component{
      return (
         <React.Fragment>
         <h2>
-          {currentArticle.title} by {author.name}
+          {currentArticle.title} by {currentArticle.author.name}
         </h2>        
         { allowToDelete && (
             <Link to={`/articles/delete/${currentArticle.id}`}>Delete</Link>
@@ -45,6 +46,10 @@ class ArticleDetail extends React.Component{
         <p>{currentArticle.content}</p>
 
         <hr />
+        <CommentForm article =  {currentArticle}/>
+        {
+          currentArticle.comments.map( (item,index) => <div key={index}>{item.comment} by {item.author.name}</div>)
+        }
       </React.Fragment>
      );
     }

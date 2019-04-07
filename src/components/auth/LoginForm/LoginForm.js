@@ -7,7 +7,7 @@ import {
   Link
 } from "react-router-dom";
 import { connect } from 'react-redux';
-import { loginUserEvent,fetchUsers } from '../../actions/userActions';
+import { loginUserEvent,fetchUsers } from '../../../actions/userActions';
 
 class LoginForm extends React.Component {
   constructor(props) {
