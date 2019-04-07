@@ -16,3 +16,8 @@ ReactDOM.render(
   </Provider>,
   rootElement
 );
+
+//REF 
+//Main Doc -  https://firebase.google.com/docs/web/setup
+//File Upload - https://firebase.google.com/docs/storage/web/start 
+//API Docs - https://firebase.google.com/docs/reference/js/
